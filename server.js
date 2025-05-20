@@ -78,7 +78,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Ruta catch-all para SPA (debe ir al final)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', '/index/index.html'));
 });
 
 
