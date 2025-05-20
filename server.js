@@ -16,19 +16,20 @@ const PORT = process.env.PORT || 3001;
 const MONGODB_URI = process.env.MONGODB_URI;
 const JWT_SECRET = process.env.JWT_SECRET;
 
+const app = express();
+
 // Middleware
 app.use(helmet());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-const app = express();
 
 // Sirve archivos estáticos (HTML, CSS, JS, imágenes)
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Para SPA (Single Page Application): redirige todas las rutas al index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index/index.html'));
+  res.sendFile(path.join(__dirname, 'index', 'index.html'));
 });
 
 app.listen(process.env.PORT || 3000, () => console.log('Server running'));
