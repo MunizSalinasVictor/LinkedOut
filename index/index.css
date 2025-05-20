@@ -1,0 +1,260 @@
+/* Reset y tipografía */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f0f2f5;
+    color: #231942;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.main-header {
+    background-color: #5E548E;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo a {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+}
+
+.main-nav li {
+    margin: 0 10px;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.main-nav a:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+/* Main Content */
+.main-content {
+    margin-top: 100px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    flex-grow: 1;
+}
+
+/* Welcome Section */
+.welcome-section {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.welcome-section h1 {
+    color: #5E548E;
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-size: 2.5rem;
+}
+
+.welcome-section p {
+    font-size: 1.2rem;
+    color: #231942;
+    margin-bottom: 30px;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Features Cards */
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.feature-card {
+    flex: 1 1 250px;
+    background: #f7f5fa;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(94, 84, 142, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-card i {
+    font-size: 40px;
+    color: #5E548E;
+    margin-bottom: 15px;
+}
+
+.feature-card h3 {
+    color: #5E548E;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.feature-card p {
+    font-size: 1rem;
+    color: #444;
+}
+
+/* Call to Action Buttons */
+.cta-buttons {
+    margin-top: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: #5E548E;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #231942;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: #9F86C0;
+    color: white;
+    border: none;
+    margin-left: 15px;
+}
+
+.btn-secondary:hover {
+    background-color: #7a679e;
+    transform: translateY(-2px);
+}
+
+/* How it works */
+.how-it-works {
+    margin-bottom: 50px;
+}
+
+.how-it-works h2 {
+    color: #5E548E;
+    margin-bottom: 15px;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.how-it-works ol {
+    max-width: 700px;
+    margin: 0 auto;
+    padding-left: 20px;
+    color: #231942;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.how-it-works li {
+    margin-bottom: 15px;
+}
+
+/* Testimonials */
+.testimonials {
+    margin-bottom: 40px;
+}
+
+.testimonials h2 {
+    color: #5E548E;
+    margin-bottom: 25px;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.testimonial-card {
+    background: #f7f5fa;
+    border-radius: 10px;
+    padding: 20px 30px;
+    max-width: 650px;
+    margin: 0 auto 20px auto;
+    font-style: italic;
+    color: #444;
+    box-shadow: 0 2px 8px rgba(94, 84, 142, 0.1);
+    position: relative;
+}
+
+.testimonial-card span {
+    display: block;
+    margin-top: 12px;
+    font-weight: 700;
+    color: #5E548E;
+    font-style: normal;
+}
+
+/* Footer */
+.main-footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #5E548E;
+    color: white;
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature-card {
+        max-width: 90%;
+    }
+
+    .how-it-works ol {
+        padding-left: 10px;
+    }
+}

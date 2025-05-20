@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro | MiRedSocial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="registro.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="logo">
+                <a href="index.html">LinkedOut</a>
+            </div>
+            
+            <!-- Navegación principal (simplificada para página de registro) -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../index/index.html">Inicio</a></li>
+                    <li><a href="../inisio/inisio.html">Iniciar sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="auth-container">
+        <h1 class="auth-title">Crear una cuenta</h1>
+        
+        <form id="registerForm" class="auth-form" novalidate>
+            <div class="form-group">
+                <label for="username">Nombre de usuario</label>
+                <input type="text" id="username" name="username" class="form-control" required 
+                       placeholder="Ej: usuario123" minlength="4" maxlength="20"
+                       pattern="[a-zA-Z0-9_]+" title="Solo letras, números y guiones bajos">
+                <small id="usernameError" class="error-message"></small>
+                <div id="usernameFeedback" class="feedback"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" class="form-control" required 
+                       placeholder="tucorreo@ejemplo.com">
+                <small id="emailError" class="error-message"></small>
+                <div id="emailFeedback" class="feedback"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <div class="password-input-container">
+                    <input type="password" id="password" name="password" class="form-control" required 
+                           minlength="6" placeholder="Mínimo 6 caracteres">
+                </div>
+                <div class="password-requirements">
+                    <p>La contraseña debe contener:</p>
+                    <ul>
+                        <li id="req-length">Mínimo 6 caracteres</li>
+                        <li id="req-uppercase">Al menos una mayúscula</li>
+                        <li id="req-number">Al menos un número</li>
+                    </ul>
+                </div>
+                <div class="password-strength">
+                    <div class="strength-bar" id="strengthBar"></div>
+                    <span id="strengthText">Seguridad: <span id="strengthLevel">Débil</span></span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirmPassword">Confirmar contraseña</label>
+                <div class="password-input-container">
+                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required 
+                           placeholder="Vuelve a escribir tu contraseña">
+                </div>
+                <small id="passwordError" class="error-message"></small>
+            </div>
+            
+            <div class="form-group terms-group">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">Acepto los <a href="../terminos/terminos.html" target="_blank">Términos de servicio</a> y la <a href="../privacidad/privacidad.html" target="_blank">Política de privacidad</a></label>
+                <small id="termsError" class="error-message"></small>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+                <span class="btn-text">Registrarse</span>
+                <span class="spinner" id="spinner" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </span>
+            </button>
+            
+            <div class="auth-link">
+                ¿Ya tienes una cuenta? <a href="../inisio/inisio.html">Inicia sesión</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal de éxito -->
+    <div id="register-success" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>¡Registro exitoso!</h3>
+            <p>Tu cuenta ha sido creada correctamente. Hemos enviado un correo de verificación a <span id="registeredEmail"></span>.</p>
+            <button id="continue-button" class="btn btn-primary">Continuar al inicio</button>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 LinkedOut By Muñiz Salinas Victor Manuel</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="registro.js"></script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+       
+     <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">LinkedOut</a>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../index/index.html">Inicio</a></li>
+                    <li><a href="../profile/profile.html">Perfil</a></li>
+                    <li><a href="../registro/registro.html">Registro</a></li>
+                    <li><a href="../inisio/inisio.html">Iniciar sesión</a></li>
+                </ul>
+            </nav>
+            
+        </div>
+    </header>
+
+    <div class="profile-container">
+
+        
+
+        <div class="cover-photo" id="cover-photo">
+            <div class="profile-picture" id="profile-picture">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto de perfil" id="profile-img">
+            </div>
+        </div>
+        
+        <div class="profile-info">
+            <div class="action-buttons">
+                <button class="btn btn-primary">Agregar a historias</button>
+                <button class="btn btn-secondary" id="edit-profile-btn">Editar perfil</button>
+                <button class="btn btn-secondary" id="friend-requests-btn">Solicitudes <span id="requests-count" class="badge">0</span></button>
+            </div>
+            
+            <h1 class="profile-name" id="profile-name">Juan Pérez</h1>
+            <p class="profile-bio" id="profile-bio">Desarrollador web | Amante de la tecnología | Viajero</p>
+            
+            <div class="profile-stats">
+                <div class="stat-item" id="friends-stat">
+                    <span class="stat-number">1,234</span>
+                    <span class="stat-label">amigos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">456</span>
+                    <span class="stat-label">seguidores</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">789</span>
+                    <span class="stat-label">seguidos</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-nav">
+            <div class="nav-item active" data-tab="posts">Publicaciones</div>
+            <div class="nav-item" data-tab="info">Información</div>
+            <div class="nav-item" data-tab="friends">Amigos</div>
+            <div class="nav-item" data-tab="photos">Fotos</div>
+            <div class="nav-item" data-tab="videos">Videos</div>
+        </div>
+        
+        <div class="profile-content" id="profile-content">
+            <div class="create-post">
+                <div class="post-input">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Usuario" class="post-user-img">
+                    <textarea id="post-text" placeholder="¿Qué estás pensando?" class="post-textarea"></textarea>
+                </div>
+                <div class="file-upload-container">
+                    <label for="post-image" class="file-input-label">
+                        Subir foto
+                    </label>
+                    <input type="file" id="post-image" accept="image/*" class="file-input">
+                    
+                    <div id="image-preview-container" class="image-preview-container">
+                        <div class="no-image-message">No hay imagen seleccionada</div>
+                        <img id="image-preview" class="image-preview" alt="Vista previa de la imagen">
+                        <button id="delete-image-btn" class="delete-image-btn">
+                            Eliminar imagen
+                        </button>
+                    </div>
+                </div>
+                <div class="post-buttons">
+                    <button id="publish-button" class="post-button primary">Publicar</button>
+                </div>
+            </div>
+            
+            <div id="posts-container" class="posts-container">
+                <!-- Las publicaciones se generarán dinámicamente aquí -->
+            </div>
+            
+            <!-- Contenedor de amigos (inicialmente oculto) -->
+            <div id="friends-container" class="friends-container">
+                <div class="friends-search">
+                    <input type="text" id="friend-search" placeholder="Buscar amigos...">
+                </div>
+                
+                <h2>Tus amigos</h2>
+                <div id="friends-list" class="friends-list">
+                    <!-- Lista de amigos se generará dinámicamente -->
+                </div>
+                
+                <div class="requests-container">
+                    <h3 class="requests-title">Solicitudes de amistad</h3>
+                    <div id="requests-list">
+                        <!-- Solicitudes se generarán dinámicamente -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Perfil de amigo (inicialmente oculto) -->
+            <div id="friend-profile" class="friend-profile">
+                <div class="back-to-friends" id="back-to-friends">
+                    ← Volver a amigos
+                </div>
+                
+                <div class="friend-profile-container">
+                    <div class="cover-photo" id="friend-cover-photo">
+                        <div class="profile-picture">
+                            <img src="" alt="Foto de perfil" id="friend-profile-img">
+                        </div>
+                    </div>
+                    
+                    <div class="profile-info">
+                        <h1 class="profile-name" id="friend-name"></h1>
+                        <p class="profile-bio" id="friend-bio"></p>
+                        
+                        <div class="profile-stats">
+                            <div class="stat-item">
+                                <span class="stat-number" id="friend-friends-count">0</span>
+                                <span class="stat-label">amigos</span>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" id="send-message-btn">Enviar mensaje</button>
+                            <button class="btn btn-secondary" id="remove-friend-btn">Eliminar amigo</button>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-nav">
+                        <div class="nav-item active" data-tab="friend-posts">Publicaciones</div>
+                        <div class="nav-item" data-tab="friend-info">Información</div>
+                        <div class="nav-item" data-tab="friend-photos">Fotos</div>
+                        <div class="nav-item active" data-tab="posts">Publicaciones</div>
+                        <div class="nav-item" data-tab="friends">Amigos</div>
+                    </div>
+                    
+                    <div id="friend-posts-container" class="posts-container">
+                        <!-- Publicaciones del amigo se generarán dinámicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de edición de perfil -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Editar perfil</h2>
+            <form id="profile-form">
+                <div class="form-group">
+                    <label for="edit-name">Nombre:</label>
+                    <input type="text" id="edit-name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="edit-bio">Biografía:</label>
+                    <textarea id="edit-bio" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="edit-friends">Número de amigos:</label>
+                    <input type="number" id="edit-friends" class="form-control">
+                </div>
+
+                <hr>
+
+                <div class="form-group">
+                    <label for="edit-profile-img">Foto de perfil (archivo):</label>
+                    <input type="file" id="edit-profile-img" class="form-control" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label for="edit-profile-img-url">Foto de perfil (URL):</label>
+                    <input type="url" id="edit-profile-img-url" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Vista previa de perfil:</label>
+                    <img id="preview-profile-img" src="" alt="Vista previa" class="profile-preview-img">
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-cover-img">Foto de portada (archivo):</label>
+                    <input type="file" id="edit-cover-img" class="form-control" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label for="edit-cover-img-url">Foto de portada (URL):</label>
+                    <input type="url" id="edit-cover-img-url" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Vista previa de portada:</label> 
+                    <div id="preview-cover-img" class="cover-preview"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de solicitudes de amistad -->
+    <div id="requests-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Solicitudes de amistad</h2>
+            <div id="modal-requests-list">
+                <!-- Solicitudes se generarán dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 LinkedOut By Muñiz Salinas Victor Manuel</p>
+    </footer>
+
+    <script src="profile.js"></script>
+</body>
+</html>

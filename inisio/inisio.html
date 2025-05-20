@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="inisio.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="logo">
+                <a href="index.html">LinkedOut</a>
+            </div>
+        
+            <!-- Navegación principal -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../index/index.html">Inicio</a></li>
+                    <li><a href="../registro/registro.html">Registro</a></li>
+                </ul>
+            </nav>
+            
+        </div>
+    </header>
+    <div class="auth-container">
+        <h1 class="auth-title">Iniciar Sesión</h1>
+        
+        <form id="loginForm" class="auth-form">
+            <div class="form-group">
+                <label for="identifier">Correo electrónico o nombre de usuario</label>
+                <input type="text" id="identifier" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" class="form-control" required>
+                <small id="loginError" class="error-message"></small>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+            
+            <div class="auth-link">
+                ¿No tienes una cuenta? <a href="../registro/registro.html">Regístrate</a>
+            </div>
+        </form>
+    </div>
+    <footer class="main-footer">
+        <p>&copy; 2025 LinkedOut By Muñiz Salinas Victor Manuel</p>
+    </footer>
+    <script src="js/auth.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>
