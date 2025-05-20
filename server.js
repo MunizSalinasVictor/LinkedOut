@@ -1,3 +1,4 @@
+require('dotenv').config({ path: 'idk.env' });
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -12,10 +13,10 @@ const fs = require('fs');
 
 const app = express();
 
-// Configuración
-const PORT = 3001;
-const MONGODB_URI = 'mongodb+srv://victor:5-2-2008@cluster0.renxy.mongodb.net/LinkedOut?retryWrites=true&w=majority';
-const JWT_SECRET = 'una_clave_secreta_super_segura_123456789';
+// Configuración desde variables de entorno
+const PORT = process.env.PORT || 3001;
+const MONGODB_URI = process.env.MONGODB_URI;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // Middleware
 app.use(helmet());
@@ -175,6 +176,20 @@ const authenticate = (req, res, next) => {
     res.status(401).json({ success: false, message: 'Token inválido' });
   }
 };
+
+// Ruta raíz para evitar "Cannot GET /"
+app.get('/', (req, res) => {
+  res.send(`
+    <h1>LinkedOut API</h1>
+    <p>Servidor en funcionamiento</p>
+    <p><strong>Endpoints disponibles:</strong></p>
+    <ul>
+      <li>POST /api/auth/register</li>
+      <li>POST /api/auth/login</li>
+      <li>GET /api/profile</li>
+    </ul>
+  `);
+});
 
 // Rutas de autenticación
 app.post('/api/auth/register', [
@@ -482,7 +497,7 @@ app.post('/api/upload/:type', authenticate, upload.single('image'), async (req, 
       });
     }
     
-    const imageUrl = `http://localhost:${PORT}/uploads/${req.file.filename}`;
+    const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
     
     // Actualizar perfil según el tipo de imagen
     if (req.params.type === 'profile') {
@@ -562,6 +577,7 @@ app.get('/api/auth/verify', authenticate, (req, res) => {
 // Iniciar servidor
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`📁 Variables de entorno cargadas desde: ${path.resolve(__dirname, 'idk.env')}`);
   console.log('🔓 Configuración CORS: Permitido cualquier origen (*)');
   console.log('⚠️ Advertencia: Esta configuración no es recomendada para producción');
 });
