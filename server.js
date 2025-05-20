@@ -73,12 +73,12 @@ authRouter.post('/register', [
 app.use('/api/auth', authRouter);
 
 // Archivos estáticos (para tu frontend)
-app.use(express.static(path.join(__dirname, '.html')));
+app.use(express.static(path.join(__dirname, 'index')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Ruta catch-all para SPA (debe ir al final)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '.html', 'index.html'));
+  res.sendFile(path.join(__dirname, 'index', 'index.html'));
 });
 
 
