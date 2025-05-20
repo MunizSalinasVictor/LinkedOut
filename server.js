@@ -31,6 +31,14 @@ app.use(cors({
   credentials: true
 }));
 
+// Sirve archivos estáticos
+app.use(express.static(path.join(__dirname, 'index')));
+
+// Ruta para el frontend (SPA)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index', 'index.html'));  // <-- Ajusta la ruta
+});
+
 // Rate limit
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
