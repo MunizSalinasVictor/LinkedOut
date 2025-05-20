@@ -11,8 +11,6 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-const app = express();
-
 // Configuración desde variables de entorno
 const PORT = process.env.PORT || 3001;
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -22,6 +20,20 @@ const JWT_SECRET = process.env.JWT_SECRET;
 app.use(helmet());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+const express = require('express');
+const app = express();
+const path = require('path');
+
+// Sirve archivos estáticos (HTML, CSS, JS, imágenes)
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Para SPA (Single Page Application): redirige todas las rutas al index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index/index.html'));
+});
+
+app.listen(process.env.PORT || 3000, () => console.log('Server running'));
 
 // Configurar CORS para permitir cualquier origen
 app.use(cors({
