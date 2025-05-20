@@ -31,14 +31,17 @@ app.use(cors({
   credentials: true
 }));
 
-// Sirve archivos estáticos
-app.use(express.static(path.join(__dirname, 'index')));
+// 1. Primero las rutas API
+app.use('/api/auth', authRoutes);
+// ... otras rutas API
 
-// Ruta para el frontend (SPA)
+// 2. Servir archivos estáticos desde .html
+app.use(express.static(path.join(__dirname, '.html')));
+
+// 3. Ruta catch-all para el frontend
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index', 'index.html'));  // <-- Ajusta la ruta
+  res.sendFile(path.join(__dirname, '.html', 'index.html'));
 });
-
 // Rate limit
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
