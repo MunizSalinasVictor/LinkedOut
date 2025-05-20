@@ -602,4 +602,8 @@ app.get('/api/auth/verify', authenticate, (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
   console.log('📁 Frontend servido desde: .html/');
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 4b82a7d (Migración de archivos a carpeta public y limpieza del proyecto)

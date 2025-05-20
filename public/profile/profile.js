@@ -571,6 +571,10 @@ document.addEventListener('DOMContentLoaded', init);
     // Función para hacer requests autenticados
 async function fetchWithAuth(url, options = {}) {
   const token = localStorage.getItem('authToken');
+<<<<<<< HEAD:profile/profile.js
+=======
+
+>>>>>>> 4b82a7d (Migración de archivos a carpeta public y limpieza del proyecto):public/profile/profile.js
   const defaultOptions = {
     headers: {
       'Content-Type': 'application/json',
