@@ -11,19 +11,17 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
+// Inicializar Express
+const app = express();
+
 // Configuración desde variables de entorno
 const PORT = process.env.PORT || 3001;
 const MONGODB_URI = process.env.MONGODB_URI;
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// Inicializar Express
-const app = express();
-
-// Middleware de seguridad y parsing
+// Middlewares esenciales
 app.use(helmet());
 app.use(express.json());
-
-// Configurar CORS para permitir cualquier origen
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -31,21 +29,10 @@ app.use(cors({
   credentials: true
 }));
 
-// 1. Primero las rutas API
-app.use('/api/auth', authRoutes);
-// ... otras rutas API
-
-// 2. Servir archivos estáticos desde .html
-app.use(express.static(path.join(__dirname, '.html')));
-
-// 3. Ruta catch-all para el frontend
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '.html', 'index.html'));
-});
-// Rate limit
+// Configuración de rate limiting
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 100, // límite por IP
   message: 'Demasiadas peticiones, intenta más tarde'
 });
 app.use('/api/auth/', limiter);
@@ -54,21 +41,14 @@ app.use('/api/auth/', limiter);
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const uploadDir = 'uploads/';
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir);
-    }
+    if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
     cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + path.extname(file.originalname));
   }
 });
-
 const upload = multer({ storage });
-
-// Archivos estáticos
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Conexión a MongoDB
 mongoose.connect(MONGODB_URI)
@@ -77,6 +57,30 @@ mongoose.connect(MONGODB_URI)
     console.error('❌ Error de conexión a MongoDB:', err.message);
     process.exit(1);
   });
+
+// Definición de rutas (aquí van tus rutas)
+const authRouter = express.Router();
+
+// Ejemplo de ruta básica (deberás completar con tu lógica)
+authRouter.post('/register', [
+  body('username').isLength({ min: 4 }),
+  body('email').isEmail(),
+  body('password').isLength({ min: 6 })
+], async (req, res) => {
+  // Tu lógica de registro aquí
+});
+
+app.use('/api/auth', authRouter);
+
+// Archivos estáticos (para tu frontend)
+app.use(express.static(path.join(__dirname, '.html')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Ruta catch-all para SPA (debe ir al final)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '.html', 'index.html'));
+});
+
 
 // Esquemas de MongoDB
 const userSchema = new mongoose.Schema({
@@ -597,7 +601,5 @@ app.get('/api/auth/verify', authenticate, (req, res) => {
 // Iniciar servidor (solo una instancia)
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
-  console.log(`📁 Variables de entorno cargadas desde: ${path.resolve(__dirname, 'idk.env')}`);
-  console.log('🔓 Configuración CORS: Permitido cualquier origen (*)');
-  console.log('⚠️ Advertencia: Esta configuración no es recomendada para producción');
+  console.log('📁 Frontend servido desde: .html/');
 });
