@@ -571,11 +571,6 @@ document.addEventListener('DOMContentLoaded', init);
     // Función para hacer requests autenticados
 async function fetchWithAuth(url, options = {}) {
   const token = localStorage.getItem('authToken');
-  if (!token) {
-    window.location.href = '/login.html';
-    return;
-  }
-
   const defaultOptions = {
     headers: {
       'Content-Type': 'application/json',
@@ -592,7 +587,6 @@ async function fetchWithAuth(url, options = {}) {
       // Token inválido o expirado
       localStorage.removeItem('authToken');
       localStorage.removeItem('userData');
-      window.location.href = '/login.html';
       return;
     }
     
