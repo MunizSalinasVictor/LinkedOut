@@ -22,7 +22,6 @@ app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const app = express();
-const path = require('path');
 
 // Sirve archivos estáticos (HTML, CSS, JS, imágenes)
 app.use(express.static(path.join(__dirname, 'public')));
