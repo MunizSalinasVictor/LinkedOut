@@ -16,23 +16,12 @@ const PORT = process.env.PORT || 3001;
 const MONGODB_URI = process.env.MONGODB_URI;
 const JWT_SECRET = process.env.JWT_SECRET;
 
+// Inicializar Express
 const app = express();
 
-// Middleware
+// Middleware de seguridad y parsing
 app.use(helmet());
 app.use(express.json());
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-
-// Sirve archivos estáticos (HTML, CSS, JS, imágenes)
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Para SPA (Single Page Application): redirige todas las rutas al index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index', 'index.html'));
-});
-
-app.listen(process.env.PORT || 3000, () => console.log('Server running'));
 
 // Configurar CORS para permitir cualquier origen
 app.use(cors({
@@ -65,6 +54,10 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+
+// Archivos estáticos
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Conexión a MongoDB
 mongoose.connect(MONGODB_URI)
@@ -200,6 +193,11 @@ app.get('/', (req, res) => {
       <li>GET /api/profile</li>
     </ul>
   `);
+});
+
+// Para SPA (Single Page Application): redirige todas las rutas al index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Rutas de autenticación
@@ -585,7 +583,7 @@ app.get('/api/auth/verify', authenticate, (req, res) => {
     res.json({ success: true, message: 'Token válido' });
 });
 
-// Iniciar servidor
+// Iniciar servidor (solo una instancia)
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
   console.log(`📁 Variables de entorno cargadas desde: ${path.resolve(__dirname, 'idk.env')}`);
